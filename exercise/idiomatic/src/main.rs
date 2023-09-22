@@ -8,7 +8,7 @@
 
 // Challenge: Clippy doesn't find *everything*. What else would you change to make this code better?
 
-const PI: f64 = std::f64::consts::FRAC_1_PI;
+use std::f32::consts::PI;
 
 fn count_to_5() -> i32 {
     let mut num = 0;
