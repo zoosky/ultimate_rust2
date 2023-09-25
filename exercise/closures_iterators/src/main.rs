@@ -20,6 +20,14 @@ fn main() {
         .map(|t| (t.0 + 1, t.1))
         .for_each(|t| println!("{:?}", t));
 
+    // destructuring tuple in closure
+
+    let pairs = vec![(0, 1), (2, 3), (4, 5)];
+    pairs
+        .into_iter()
+        .map(|(x, y)| (x + 1, y)) // destructuring
+        .for_each(|t| println!("{:?}", t));
+
     // 3. Uncomment the code below. There is a mutable vector named `numbers`. Use an iterator over
     // mutable references to multiply each of the values in `numbers` by 3.
     // Hint 1: You'll need .iter_mut() -- bonus points if you use the shorter, syntactic sugar form!
@@ -27,7 +35,7 @@ fn main() {
 
     let mut numbers = vec![1, 2, 3, 4];
     for x in numbers.iter_mut() {
-        *x = *x * 3; // multiply the value by 3 via the mutable reference x
+        *x *= 3; // multiply the value by 3 via the mutable reference *x = *x * 3
     }
     println!("{:?}", numbers); // should print [3, 6, 9, 12]
 
@@ -49,9 +57,18 @@ fn main() {
     let words = vec!["autobot", "beach", "car", "decepticon", "energon", "frothy"];
     let transformed: Vec<String> = words
         .into_iter()
-        .filter(|w| w.contains("h"))
+        .filter(|w| !w.contains("h"))
         .map(|w| w.to_uppercase()) // returns String
         .collect(); // do the stuff here
+    println!("Transformed: {:?}", transformed);
+
+    // turbofish variant
+    let words = vec!["autobot", "beach", "car", "decepticon", "energon", "frothy"];
+    let transformed = words
+        .into_iter()
+        .filter(|w| !w.contains("h"))
+        .map(|w| w.to_uppercase()) // returns String
+        .collect::<Vec<String>>(); // do the stuff here
     println!("Transformed: {:?}", transformed);
 
     // Challenge:
